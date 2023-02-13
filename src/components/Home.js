@@ -17,6 +17,7 @@ function Home() {
     const [movies, setMovies] = useState([])
     const [searchKey, setSearchKey] = useState("")
     const [movie, setMovie] = useState({title: "Loading Movies"})
+    const [five,setFive] = useState([])
 
     const navigate = useNavigate();
     let {username} = useParams();
@@ -37,8 +38,34 @@ function Home() {
             }
         })
 
-        console.log(data.results[0])
-        setMovies(data.results)
+        // console.log(data.results[0])
+        // console.log(data.results)
+
+        // for(var i=0 ; i<5 ;i++ ){
+        //     // setMovies(data.results[i])
+        //     setFive(data.results)
+        //     console.log(five)
+        // }
+        // setFive(data.results[0])
+        // setFive(data.results[1])
+        // setFive(data.results[2])
+        // setFive(data.results[3])
+        // setFive(data.results[4])
+
+        var intermidiary = []
+
+        for(let i=0;  i<5; i++){
+            intermidiary[i] = data.results[i]
+        }
+
+        console.log(intermidiary)
+        
+        setMovies(intermidiary)
+
+        console.log(movies)
+
+        // console.log(data.results[0])
+
         setMovie(data.results[0])
 
         if (data.results.length) {
@@ -70,11 +97,11 @@ function Home() {
     }
 
     const renderMovies = () => (
-        movies.map(movie => (
+        movies.map(item => (
             <Movie
                 selectMovie={selectMovie}
-                key={movie.id}
-                movie={movie}
+                key={item.id}
+                movie={item}
             />
         ))
     )
@@ -82,6 +109,13 @@ function Home() {
     function Logout(){
         navigate("/");
     }
+
+    // async function GetRecommender(movie.id) {
+    //     await axios.post("https://localhost:7125/api/Recommender/GetRecommender/" + movie.id, {
+    //         movies: id,
+    //     });
+    //     setMovies("");
+    //   }
 
     return (
         <div className="home-movie">
@@ -132,13 +166,15 @@ function Home() {
                                 </> :
                                 <div className="center-max-size">
                                     <div className="poster-content">
-                                        {trailer ?
-                                            <button className={"button play-video"} onClick={() => setPlaying(true)}
-                                                    type="button">Play
-                                                Trailer</button>
-                                            : 'Sorry, no trailer available'}
-                                        <h1>{movie.title}</h1>
-                                        <p>{movie.overview}</p>
+                                        <div className="movie">
+                                            {trailer ?
+                                                <button className={"button play-video"} onClick={() => setPlaying(true)}
+                                                        type="button">Play
+                                                    Trailer</button>
+                                                : 'Sorry, no trailer available'}
+                                            <h1>{movie.title}</h1>
+                                            <p>{movie.overview}</p>
+                                        </div>
                                     </div>
                                 </div>
                             }

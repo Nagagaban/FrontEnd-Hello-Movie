@@ -99,21 +99,22 @@ let {username} = useParams();
 
 return (
     <div className="home-movie">
-        <header className="center-max-size header">
-                <span className={"brand"}>Hello Movie</span>
-                <span className={"brand"}>Admin: {username}</span>
-                <button
-                    type="button"
-                    class="btn btn-danger"
-                    onClick={() => Logout()}
-                  >Log out</button>
-            </header>
-        <div class="container mt-4">
+      <header className="center-max-size header">
+        <span className={"brand"}>Hello Movie</span>
+        <span className={"brand"}>Admin: {username}</span>
+        <button
+          type="button"
+          class="btn btn-danger"
+          onClick={() => Logout()}
+          >Log out</button>
+        </header>
+        
+        <div class="container d-flex justify-content-center">
             <form>
-              <div class="form-group">
+              {/* <div class="form-group">
                 <span className="h2">Administrator</span>
-              </div>
-                <div class="form-group">
+              </div> */}
+                {/* <div class="form-group"> */}
                     <input type="text" 
                         class="form-control" 
                         id="userId" 
@@ -122,7 +123,8 @@ return (
                         onChange={(event) => {
                             setUserId(event.target.value);
                         }}/>
-
+                    <label><h2>User Details</h2></label>
+                    <br/>
                     <label>Username</label>
                     <input type="text" 
                         class="form-control" 
@@ -153,18 +155,22 @@ return (
                         <option value="Normal User">Normal User</option>
                         <option value="Administrator">Administrator</option>
                     </select>       
-                </div>
-                <div>
+                {/* </div> */}
+                {/* <div> */}
                     <button class="btn btn-primary mt-4" onClick={save}>Register</button>
+                    <br/>
                     <button class="btn btn-warning mt-4" onClick={update}>Update</button>
-                </div>
+                {/* </div> */}
             </form>
-        </div>
+          </div>
 
         <br></br>
-
+        
         <table class="table table-dark" align="center">
         <thead>
+          <tr>
+            <th colspan="5"><h2>User Table</h2></th>
+          </tr>
           <tr>
             <th scope="col">User Id</th>
             <th scope="col">Username</th>
@@ -178,7 +184,7 @@ return (
           return (
             <tbody>
               <tr>
-                <th scope="row">{user.UserId} </th>
+                <td>{user.userId} </td>
                 <td>{user.userName}</td>
                 <td>{Array.from({length: user.userPassword.length}, () => '*').join('')}</td>
                 <td>{user.userType}</td>
